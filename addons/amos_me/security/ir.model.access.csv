@@ -1,0 +1,6 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_amos_me_user","amos_me User","model_amos_me","group_amos_me_user",1,1,1,0
+"access_amos_me_manager","amos_me Manager","model_amos_me","group_amos_me_manager",1,1,1,1
+
+"access_amos_me_line_user","amos_me_line User","model_amos_me_line","group_amos_me_user",1,1,1,0
+"access_amos_me_line_manager","amos_me_line Manager","model_amos_me_line","group_amos_me_manager",1,1,1,1

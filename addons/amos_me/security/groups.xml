@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<openerp>
+    <!--noupdate=“1” 表示，模块升级时候不更新本文件数据。-->
+    <data noupdate="0">
+
+        <!-- ir.model.access.csv 规则-->
+        <!-- id名 access+组ID -->
+        <!-- name名 权限名name名称 -->
+        <!-- model_id:id名 表名-->
+        <!-- group_id:id名 创建的组ID-->
+
+        <!-- 创建一个分类-->
+        <record id="base_module_amos_me" model="ir.module.category">
+            <field name="name">会议分类</field>
+            <field name="description">会议分类.</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <!-- ***************************************************员工组与规则************************************* -->
+        <record id="group_amos_me_user" model="res.groups">
+            <field name="name">用户</field>
+            <field name="category_id" ref="base_module_amos_me"/>
+            <field name="comment">User</field>
+        </record>
+
+        关联菜单
+        <record model="ir.ui.menu" id="menu_one_amos_me">
+            <field eval="[(4, ref('group_amos_me_user'))]" name="groups_id"/>
+        </record>
+        <record model="ir.ui.menu" id="menu_two_amos_me">
+            <field eval="[(4, ref('group_amos_me_user'))]" name="groups_id"/>
+        </record>
+        <record model="ir.ui.menu" id="menu_three_amos_me">
+            <field eval="[(4, ref('group_amos_me_user'))]" name="groups_id"/>
+        </record>
+
+        <!-- ***************************************************经理组与规则************************************* -->
+        <record id="group_amos_me_manager" model="res.groups">
+            <field name="name">经理</field>
+            <field name="category_id" ref="base_module_amos_me"/>
+            <!--继承用户组-->
+            <field name="implied_ids" eval="[(4, ref('group_amos_me_user'))]"/>
+            <field name="comment">经理</field>
+        </record>
+
+
+    </data>
+
+
+    <data noupdate="0">
+
+    <!-- 用户规则-->
+    <record id="rule_amos_me_user" model="ir.rule">
+    <field name="name">用户</field>
+    <field  name="model_id" ref="model_amos_me"/>
+    <field name="domain_force">[('user_id','=',user.id)]</field>
+    <field name="groups" eval="[(4, ref('group_amos_me_user'))]"/>
+    </record>
+
+    <!-- 经理规则-->
+    <record id="rule_amos_me_manager" model="ir.rule">
+    <field name="name">经理</field>
+    <field  name="model_id" ref="model_amos_me"/>
+    <field name="domain_force"></field>
+    <field name="groups" eval="[(4, ref('group_amos_me_manager'))]"/>
+    </record>
+
+    </data>
+</openerp>
